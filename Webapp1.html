@@ -1,0 +1,81 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+<link rel="stylesheet" href="https://js.arcgis.com/4.30/esri/themes/light/main.css">
+<script src="https://js.arcgis.com/4.30/"></script>
+      <style>
+        #view{
+            width: 600px;
+            height: 500px;
+            border: 5px solid brown;
+        }
+
+    </style>
+</head>
+<body>
+    <div id="view"></div>
+
+
+
+    <script>
+// display Base map
+var bmap;
+var mapview;
+var bg;
+
+
+require(["esri/Map",
+"esri/views/MapView",
+"esri/widgets/BasemapGallery",
+"esri/widgets/Search",
+"esri/widgets/ScaleBar",
+"esri/widgets/Home"
+
+], 
+(Map, MapView, BasemapGallery, Search, ScaleBar, Home) => 
+{ /* Map Object - code goes here */ 
+    bmap= new Map({
+        basemap:"topo-vector"
+    });
+
+    mapview= new MapView({
+        container:"view",
+        map:bmap,
+        zoom: 3,
+        center: [132.49406970487607, -22.972918581245892]
+    });
+// object for basemap galary
+bg=new BasemapGallery(
+    {
+        view:mapview
+    }
+);
+mapview.ui.add(bg, "top-right");
+    
+var search= new Search(
+    {
+        view:mapview
+    }
+);
+mapview.ui.add(search,"bottom-right");
+
+var scale= new ScaleBar(
+    {
+        view:mapview
+    }
+);
+mapview.ui.add(scale,"bottom-left");
+var hom= new Home(
+    {
+        view:mapview
+    }
+);
+
+mapview.ui.add(hom,"top-left");
+
+});  // END OF MAIN 
+    </script>
+</body>
+</html>

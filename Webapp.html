@@ -1,0 +1,191 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+<link rel="stylesheet" href="https://js.arcgis.com/4.30/esri/themes/light/main.css">
+<script src="https://js.arcgis.com/4.30/"></script>
+      <style>
+        #view{
+            width: 100%;
+            height: 50%;
+            border: 5px solid brown;
+        }
+        #tbl{
+            width:100%;
+            height:40%;
+            border: 5px solid blue;
+        }
+
+    </style>
+</head>
+<body>
+
+<button onclick="satmap();">Stellite</button>
+<button onclick="street();">street</button>
+<button id="osm">OSM</button>
+
+<input type="checkbox" id="lyr0">AUSTRALIA MAP
+<input type="checkbox" id="lyr1">STATE MAP
+<input type="checkbox" id="lyr2">DISTRICT MAP
+
+<div id="view"></div>
+<div id="tbl"></div>
+
+
+    <script>
+// display Base map
+var bmap;
+var mapview;
+var layer_0;
+var layer_1;
+var layer_2;
+var legend;
+var tbl;
+var prin;
+
+require(["esri/Map",
+"esri/views/MapView",
+"esri/layers/FeatureLayer",
+"esri/widgets/Legend",
+"esri/widgets/FeatureTable",
+"esri/widgets/Print",
+], 
+(Map, MapView, FeatureLayer, Legend, FeatureTable, Print) => 
+{ /* Map Object - code goes here */ 
+    bmap= new Map({
+        basemap:"topo"
+    });
+
+    mapview= new MapView({
+        container:"view",
+        map:bmap,
+        zoom: 4,
+        center: [136.29064159432767, -21.689254529463618]
+    });
+
+legend= new Legend(
+    {
+        view:mapview
+    }    
+);
+mapview.ui.add(legend,"top-right");
+
+document.getElementById("osm").addEventListener("click", function()
+{
+    bmap.basemap="osm";
+})
+
+
+layer_0= new FeatureLayer({
+    url:"https://services8.arcgis.com/PiQBd34m15DQ47fF/ArcGIS/rest/services/aust/FeatureServer/0"
+});
+// bmap.add(layer_0);
+
+layer_1= new FeatureLayer({
+    url:"https://services8.arcgis.com/PiQBd34m15DQ47fF/arcgis/rest/services/aust/FeatureServer/1"
+});
+// bmap.add(layer_1);
+// adding layer to the map
+layer_2= new FeatureLayer({
+    url:"https://services8.arcgis.com/PiQBd34m15DQ47fF/arcgis/rest/services/aust/FeatureServer/2"
+    // url:"https://sampleserver6.arcgisonline.com/arcgis/rest/services/Earthquakes_Since1970/FeatureServer"
+    // url:"https://sampleserver6.arcgisonline.com/arcgis/rest/services/Military/FeatureServer"
+});
+// bmap.add(layer_2);
+
+
+
+var chk0= document.getElementById("lyr0");
+chk0.addEventListener("click", function()
+    {
+        // layer_0.visible=!layer_0.visible;
+        if (chk0.checked==true)
+        {
+            bmap.add(layer_0);
+            var tblcon=document.getElementById("tbl");
+            tblcon.textContent="";
+            tbl= new FeatureTable(
+    {
+        view:mapview,
+        container:tblcon,
+        layer:layer_0
+    }
+)
+        }
+        else{
+            bmap.removeAll();
+        }
+
+    }
+);
+var chk1=document.getElementById("lyr1");
+chk1.addEventListener("click", function()
+    {
+        // layer_1.visible=!layer_1.visible;
+        // bmap.add(layer_1);
+        if (chk1.checked==true)
+        {
+            bmap.add(layer_1);
+            var tblcon=document.getElementById("tbl");
+            tblcon.textContent="";
+            tbl= new FeatureTable(
+    {
+        view:mapview,
+        container:tblcon,
+        layer:layer_1
+    }
+)
+        }
+        else{
+            bmap.removeAll();
+        }
+    }
+);
+var chk2= document.getElementById("lyr2");
+chk2.addEventListener("click", function()
+    {
+        // layer_2.visible=!layer_2.visible;
+        if (chk2.checked==true)
+        {
+            bmap.add(layer_2);
+            var tblcon=document.getElementById("tbl");
+            tblcon.textContent="";
+            tbl= new FeatureTable(
+    {
+        view:mapview,
+        container:tblcon,
+        layer:layer_2
+    }
+)
+        }
+        else{
+            bmap.removeAll();
+        }
+
+    }
+);
+
+var prin= new Print(
+    {
+        view:mapview,
+        container: document.createElement("view")
+    }
+);
+mapview.ui.add(prin, "bottom-left");
+
+}); //end of main functin
+
+function satmap()
+{
+    // alert("This is my satellite Map");
+    bmap.basemap="satellite";
+}
+function street()
+{
+    bmap.basemap="streets-night-vector"
+}
+
+    </script>
+</body>
+</html>

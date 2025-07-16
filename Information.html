@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Image Slider with Top Banner</title>
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f2f2f2;
+    }
+
+    /* Navigation Banner */
+    .navbar {
+      width: 100%;
+      background-color: #333;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+    }
+
+    .navbar a {
+      padding: 14px 20px;
+      display: block;
+      color: white;
+      text-align: center;
+      text-decoration: none;
+      transition: background-color 0.3s;
+    }
+
+    .navbar a:hover {
+      background-color: #575757;
+    }
+
+    /* Center the content below nav */
+    .main-content {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: calc(100vh - 50px); /* Adjust height based on navbar */
+      padding-top: 10px;
+    }
+
+    .slider {
+      position: relative;
+      width: 800px;
+      height: 600px;
+      overflow: hidden;
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.3);
+      background-color: #fff;
+    }
+
+    .slides {
+      display: flex;
+      height: 100%;
+      transition: transform 0.5s ease-in-out;
+    }
+
+    .slide {
+      min-width: 100%;
+      height: 100%;
+    }
+
+    .slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      object-position: center;
+    }
+
+    .nav-button {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 2rem;
+      background-color: rgba(0,0,0,0.5);
+      color: white;
+      border: none;
+      cursor: pointer;
+      padding: 10px 15px;
+      border-radius: 50%;
+    }
+
+    .nav-button:hover {
+      background-color: rgba(0,0,0,0.8);
+    }
+
+    .prev {
+      left: 10px;
+    }
+
+    .next {
+      right: 10px;
+    }
+  </style>
+</head>
+<body>
+<div class="main">
+	<h2><b><u>Information</u></b></h2>
+<ul>
+	<li><a href="Index.html">Home</a></li>
+	<li><a href="about.html">About Me</a></li>
+	<li><a href="Information.html">Information</a></li>
+	<li><a href="Project.html">projects</a>
+		<div class="sub">
+			<ul>
+			<li><a href="Ashghal.html">Ashghal Projects</a> </li>
+			<li><a href="FIFA-4-PROJECT.JPG">FRP-4</a> </li>
+			<li class="hover-me"><a href="#">Project3</a>
+			<div class="sub-1">
+		<ul>
+			<li><a href="#">Project A</a> </li>
+			<li><a href="#">Project B</a> </li>
+			<li><a href="#">Project C</a> </li>
+			<li><a href="#">Project D</a> </li>
+			<li><a href="#">Project E</a> </li>
+		</ul>
+			</div>
+			</li>
+			<li><a href="ROAD_PROJECT.JPG">Road Project</a> </li>
+			<li><a href="EAST_WEST.JPG">Service Road Project
+			<li><a href="Zone38_39.JPG">Flood Medication Project</a> </li>
+			<li><a href="Riyadh.JPG">Riyadh Metro Project</a> </li>
+		</ul>
+
+		</div>
+	</li>
+	<li><a href="blog.html">Blog</a></li>
+	<li><a href="contact.html">Contact</a></li>
+	<li><a href="login.html">Login</a></li>
+</ul>
+</div>
+  <!-- Top Navigation Bar -->
+  <!-- <div class="navbar">
+    <a href="#">Home</a>
+    <a href="#">About Me</a>
+    <a href="#">Download</a>
+    <a href="#">Project</a>
+    <a href="#">Contact</a>
+    <a href="#">Login</a>
+  </div> -->
+
+  <!-- Main Content with Image Slider -->
+  <div class="main-content">
+    <div class="slider">
+      <div class="slides" id="slides">
+        <div class="slide"><img src="ashghal_projects.jpg" alt="Slide 1"></div>
+        <div class="slide"><img src="FIFA-4-PROJECT.jpg" alt="Slide 2"></div>
+        <div class="slide"><img src="ROAD_PROJECT.jpg" alt="Slide 3"></div>
+        <div class="slide"><img src="Zone38_39.JPG" alt="Slide 4"></div>
+        <div class="slide"><img src="Riyadh.jpg" alt="Slide 5"></div>
+        <div class="slide"><img src="WebApp.jpg" alt="Slide 6"></div>
+        <div class="slide"><img src="Webapp1.JPG" alt="Slide 7"></div>
+        <div class="slide"><img src="Webapp3.JPG" alt="Slide 8"></div>
+        <div class="slide"><img src="Webapp4.JPG" alt="Slide 9"></div>
+      </div>
+      <button class="nav-button prev" onclick="moveSlide(-1)">&#10094;</button>
+      <button class="nav-button next" onclick="moveSlide(1)">&#10095;</button>
+    </div>
+  </div>
+
+  <!-- JavaScript for Slide Navigation -->
+  <script>
+    let currentSlide = 0;
+    const slides = document.getElementById('slides');
+    const totalSlides = slides.children.length;
+
+    function moveSlide(direction) {
+      currentSlide = (currentSlide + direction + totalSlides) % totalSlides;
+      slides.style.transform = `translateX(-${currentSlide * 100}%)`;
+    }
+  </script>
+
+</body>
+</html>
