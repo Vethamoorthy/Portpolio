@@ -154,6 +154,7 @@ font-size: 20px;
 body {
   font-family: 'Segoe UI', sans-serif;
   margin: 1px;
+  padding: 0;
   background: linear-gradient(to right, #e0f7fa, #fce4ec);
   /* color: #09e426; */
   /* border: 2px solid; */
@@ -162,11 +163,13 @@ body {
   max-width: 1000px;
   margin: auto;
   padding: 20px;
+  /* display: flex; */
+  /* flex-wrap: wrap; */
 }
 header {
   text-align: center;
   position: fixed;
-  padding: 20px 0;
+  padding: 10px 0;
   margin-top: 0px;
 }
 .profile-pic {
@@ -256,5 +259,8 @@ button{
 } */
 .id-1{
   color: green;
-
+}
+.box {
+  flex: 1 1 300px;
+  margin: 10px;
 }
